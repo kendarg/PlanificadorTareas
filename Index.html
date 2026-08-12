@@ -24,7 +24,7 @@
     <nav class="navbar navbar-expand-lg border-bottom ">
         <div class="container-fluid">
             <a class="navbar-brand d-flex align-items-center" href="Index.html">
-                <i class="bi bi-pencil"></i></a>
+                <i class="bi bi-journal-richtext"></i></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             </button>
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
@@ -48,12 +48,13 @@
  
     <!--Notas Extra -->
     <div class="d-flex" style="min-height: calc(100vh - 56px);">
-
         <div class="notasExtra d-flex flex-column align-items-stretch flex-shrink-0 mt-4 border-end border   rounded p-3" style="width: 250px;">
+         
+
             <a href="/" class="d-flex align-items-center justify-content-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
                 <span class="fs-5 fw-semibold">Notas Extras</span>
             </a>
-            <div class="list-group list-group-flush scrollarea">
+            <div class="list-group list-group-flush scrollarea border rounded">
                 <a href="#" class="list-group-item  backfondo list-group-item-action py-3 lh-sm">
                     <div class="d-flex w-100 align-items-center justify-content-between">
                         <strong class="mb-1">Nota 1</strong>
@@ -82,86 +83,87 @@
             <div class="row g-4">
 
 
-
-<!--Formulario-->
-<div class="col-12 col-md-4">
-    <form class="p-3 border rounded formulario">
-        <div class="mb-10">
-            <label for="descInput" class="form-label">Description</label>
-            <input type="text" class="form-control" id="descInput" placeholder="Proyecto Web">
-        </div>
-        <div class="mb-3">
-            <label for="personaInput" class="form-label">Persona a cargo</label>
-            <input type="text" class="form-control" id="personaInput" placeholder="Ken">
-        </div>
-        <div class="mb-3">
-            <label for="importanciaInput" class="form-label" id="importanciatxt">Importancia</label>
-            <select class="form-select" id="importanciaInput2">
-                <option selected>Seleccionar...</option>
-                <option value="1">Alta</option>
-                <option value="2">Media</option>
-                <option value="3">Baja</option>
-            </select>
-        </div>
-    <div class="mb-3">
-        <label for="fechaInput" class="form-label">Fecha</label>
-        <input type="date" class="form-control" id="fechaInput">
-    </div>
-    <div class="mb-3">
-        <label for="notasInput" class="form-label">Notas</label>
-        <textarea class="form-control" id="notasInput" rows="3" placeholder="Hacer Proyecto"></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Agregar</button>
-    </form>
-</div>
-
-
 <!--Tareas -->
-<div class="col-12 col-md-8 ">
+<div class="col-12 col-md-12">
     <div class="d-flex flex-column gap-3 py-3 ps-4 pe-3 border rounded tareas">
 
     <div class="d-flex flex-wrap gap-2 w-100 mt-4 ps-8">
+        <!--Formulario-->
+            <button id="btnNuevaTarea" class="btn btn-secondary">Agregar Tarea</button>
+            <vr></vr>
             <span class="Rojo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">
                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
-                Finalizado
+                Alta
             </span>
             <span class="Amarillo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill">
                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
-                Cerca de Finalizar
+                Media
             </span>
             <span class="Verde badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
-                A Tiempo
+                Baja
             </span>
         </div>
+        <hr>
 
         <!-- Sección de la fecha -->
         <div class="p-3 border rounded d-flex align-items-center gap-3 tareaFondo">
+            <div id="tituloTaller">
+            <h5>Titulo</h5>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis provident atque ea, porro ut officiis inventore quidem hic dicta cupiditate sequi quos sapiente quo alias iure? Sit, explicabo praesentium?</p>
+            </div>
             <span class="Rojo  badge d-flex flex-fill align-items-center justify-content-center py-3  ps-5 pe-5 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill"><!--input type="text" class="fechaL" placeholder="21/09/2026"--->06/08/2026</span>
+            <i class="bi bi-pencil-square"></i>
+            <i class="bi bi-check2-square"></i>
+            <i class="bi bi-trash3"></i>
         </div>
-
+        <hr>
         <div class="p-3 border rounded d-flex align-items-center gap-3 tareaFondo">
+            <div id="tituloTaller">
+            <h5>Titulo</h5>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis provident atque ea, porro ut officiis inventore quidem hic dicta cupiditate sequi quos sapiente quo alias iure? Sit, explicabo praesentium?</p>
+            </div>
             <span class="Rojo badge d-flex flex-fill align-items-center justify-content-center py-3  ps-5 pe-5 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill"><!--input type="text" class="fechaL" placeholder="21/09/2026"--->06/08/2026</span>
+            <i class="bi bi-pencil-square"></i>
+            <i class="bi bi-check2-square"></i>
+            <i class="bi bi-trash3"></i>
         </div>
+        <hr>
 
         <div class="p-3 border rounded d-flex align-items-center gap-3 tareaFondo">
+            <div id="tituloTaller">
+            <h5>Titulo</h5>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis provident atque ea, porro ut officiis inventore quidem hic dicta cupiditate sequi quos sapiente quo alias iure? Sit, explicabo praesentium?</p>
+            </div>
             <span class="Rojo badge d-flex flex-fill align-items-center justify-content-center py-3  ps-5 pe-5 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill"><!--input type="text" class="fechaL" placeholder="21/09/2026"--->06/08/2026</span>
+            <i class="bi bi-pencil-square"></i>
+            <i class="bi bi-check2-square"></i>
+            <i class="bi bi-trash3"></i>
         </div>
+        <hr>
 
         <div class="p-3 border rounded d-flex align-items-center gap-3 tareaFondo">
+            <div id="tituloTaller">
+            <h5>Titulo</h5>
             <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Odio perferendis provident atque ea, porro ut officiis inventore quidem hic dicta cupiditate sequi quos sapiente quo alias iure? Sit, explicabo praesentium?</p>
+            </div>
             <span class="Verde badge d-flex flex-fill align-items-center justify-content-center py-3 ps-5 pe-5 text-danger-emphasis bg-success-subtle border border-success-subtle rounded-pill"><!--input type="text" class="fechaL" placeholder="21/09/2026"--->06/08/2026</span>
+            <i class="bi bi-pencil-square"></i>
+            <i class="bi bi-check2-square"></i>
+            <i class="bi bi-trash3"></i>
         </div>
+        <hr>
 
     </div>
 </div>
 
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/Js/visual.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="Js/visual.js"></script>
+    <script src="Js/alerta.js"></script>
+    <!-- SweetAlert -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
