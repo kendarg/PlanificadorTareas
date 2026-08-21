@@ -1,0 +1,12 @@
+.bi-pencil-square,
+.bi-check2-square,
+.bi-check2-square-fill,
+.bi-trash3{
+    cursor:  pointer;
+    font-size: 1.2rem;
+    transition: transform  0.15s ease, color 0.15s ease;
+}
+.bi-pencil-square:hover { color: #0d6efd; transform: scale(1.15); }
+.bi-check2-square:hover,
+.bi-check2-square-fill:hover { color: #198754; transform: scale(1.15); }
+.bi-trash3:hover { color: #dc3545; transform: scale(1.15); }
