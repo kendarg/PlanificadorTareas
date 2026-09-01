@@ -1,4 +1,4 @@
-// 1. Instancia global de TaskManager
+
 const taskManager = new TaskManager();
 
 const btnNuevaTarea = document.querySelector("#btnNuevaTarea");
@@ -76,8 +76,7 @@ btnNuevaTarea.addEventListener("click", () => {
     if (resultado.isConfirmed) {
       const datosTarea = resultado.value;
 
-      // 2. CONEXIÓN CON TASKMANAGER (Registro de la tarea en memoria)
-      // Mapeamos los datos de SweetAlert a los parámetros de addTask(name, description, dueDate, status)
+
       taskManager.addTask(
         datosTarea.titulo,
         datosTarea.notas,
@@ -85,11 +84,11 @@ btnNuevaTarea.addEventListener("click", () => {
         'PORHACER'
       );
 
-      // 3. Comprobación requerida por la guía
+     
       console.log("Tarea registrada correctamente en TaskManager:");
       console.log(taskManager.tasks);
 
-      // Notificación Toast de éxito
+
       Swal.mixin({
         toast: true,
         position: "top-end",
