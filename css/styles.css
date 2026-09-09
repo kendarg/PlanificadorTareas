@@ -34,3 +34,8 @@ background-color: #ECECEC;
 #btnNuevaTarea{
     background-color: #6A040F;
 }
+@media (min-width: 992px) {
+    .offcanvas-lg.notasExtra {
+        background-color: #A1C29F !important;
+    }
+}
