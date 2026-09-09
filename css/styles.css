@@ -5,11 +5,11 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
 /* *Colores */
 
 .navbar, .formulario, .tareas{
-    background-color: #A1C29F ;
+    background-color: #2C3840 ;
 }
 
 .notasExtra{
-    background-color: #A1C29F   ;
+    background-color: #2C3840   ;
     
 }
 .tareaFondo, .backfondo{
@@ -36,6 +36,9 @@ background-color: #ECECEC;
 }
 @media (min-width: 992px) {
     .offcanvas-lg.notasExtra {
-        background-color: #A1C29F !important;
+        background-color: #2C3840 !important;
     }
+}
+.bi-person-circle, .bi-moon-stars-fill, .home1{
+    color:#D3D9D0
 }

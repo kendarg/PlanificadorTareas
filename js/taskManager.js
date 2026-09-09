@@ -90,7 +90,6 @@ class TaskManager {
     }
 
     setupEventListeners() {
-        // Escucha eventos en toda la sección de tareas (Delegación de Eventos)
         document.addEventListener('click', (e) => {
             const target = e.target;
             const tarjetaTarea = target.closest('.tareaFondo');
@@ -98,7 +97,6 @@ class TaskManager {
 
             const taskId = parseInt(tarjetaTarea.getAttribute('data-id'));
 
-            // Acción: Eliminar Tarea
             if (target.classList.contains('bi-trash3') || target.classList.contains('btn-eliminar')) {
                 Swal.fire({
                     title: '¿Eliminar tarea?',
@@ -124,12 +122,9 @@ class TaskManager {
                 });
             }
 
-            // Acción: Marcar Completada
             if (target.classList.contains('bi-check2-square') || target.classList.contains('btn-completar')) {
                 this.toggleCompleteTask(taskId);
             }
-
-            // Acción: Editar Tarea
             if (target.classList.contains('bi-pencil-square') || target.classList.contains('btn-editar')) {
                 const task = this.tasks.find(t => t.id === taskId);
                 if (!task) return;
@@ -177,13 +172,10 @@ class TaskManager {
                     }
                 }).then((res) => {
                     if (res.isConfirmed) {
-                        // Actualizar datos
                         Object.assign(task, res.value);
                         this.saveToLocalStorage();
-                        // Recargar la lista en pantalla
                         const contenedor = document.querySelector('.tareas');
                         if (contenedor) {
-                            // Limpiar y re-renderizar todas
                             const items = contenedor.querySelectorAll('.tareaFondo, hr');
                             items.forEach(el => el.remove());
                             this.tasks.forEach(t => this.renderTask(t));
