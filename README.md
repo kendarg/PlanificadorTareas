@@ -4,6 +4,13 @@ Aplicación web para gestionar tareas de forma sencilla mediante una interfaz in
 
 El proyecto utiliza **JavaScript, Bootstrap y SweetAlert2** para construir la interfaz y las ventanas modales. La estructura visual incluye una sección de tareas, notas adicionales y diferentes niveles de importancia.
 
+## ▶️ Figma, Trelo y Gitpage
+* Figma:
+- https://www.figma.com/design/gsS7yzaMTd99tSOECDah1x/Sin-t%C3%ADtulo?node-id=74-11&t=KPrZ0YdlOD33uVDF-1
+* Trelo: https://trello.com/invite/b/6a6ba35f30f69a3c4c7acc56/ATTI65e0e9f4ef5bedbdaf73187603904658B74D1714/planificador-de-tareas
+* Gitpage: https://kendarg.github.io/PlanificadorTareas/
+
+
 ## 🚀 Funcionalidades
 
 * ➕ Agregar nuevas tareas.
@@ -107,14 +114,7 @@ La aplicación cuenta con:
 
 La sección principal muestra las tareas junto con iconos de edición, finalización y eliminación.
 
-## ▶️ Figma, Trelo y Gitpage
-* Figma:
-- https://www.figma.com/design/gsS7yzaMTd99tSOECDah1x/Sin-t%C3%ADtulo?node-id=74-11&t=KPrZ0YdlOD33uVDF-1
-* Trelo: https://trello.com/invite/b/6a6ba35f30f69a3c4c7acc56/ATTI65e0e9f4ef5bedbdaf73187603904658B74D1714/planificador-de-tareas
-* Gitpage: https://kendarg.github.io/PlanificadorTareas/
 
-
-```
 
 
 ## 👨‍💻 Autor
