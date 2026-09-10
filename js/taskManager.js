@@ -25,11 +25,9 @@ class TaskManager {
     }
 
     deleteTask(id) {
-        // Filtrar array y eliminar del DOM
         this.tasks = this.tasks.filter(task => task.id !== id);
         const elementoTarea = document.querySelector(`[data-id="${id}"]`);
         if (elementoTarea) {
-            // Eliminar elemento y la línea <hr> adyacente si existe
             if (elementoTarea.nextElementSibling && elementoTarea.nextElementSibling.tagName === 'HR') {
                 elementoTarea.nextElementSibling.remove();
             }
@@ -207,3 +205,148 @@ class TaskManager {
 }
 
 const taskManager = new TaskManager();
+
+// Notas Extra
+
+const btnNotaExtra = document.getElementById("btnNotaExtra");
+const contenedorNotasExtras = document.getElementById("contenedorNotasExtras");
+
+if (btnNotaExtra && contenedorNotasExtras) {
+    btnNotaExtra.addEventListener("click", () => {
+        Swal.fire({
+            title: 'Nueva Nota Extra',
+            html: `
+                <div class="mb-3 text-start">
+                    <label for="swal-extra-titulo" class="form-label">Título</label>
+                    <input type="text" id="swal-extra-titulo" class="form-control" placeholder="Recordatorio">
+                </div>
+                <div class="mb-3 text-start">
+                    <label for="swal-extra-contenido" class="form-label">Contenido</label>
+                    <textarea id="swal-extra-contenido" class="form-control" rows="3" placeholder="Ingresa la informacion"></textarea>
+                </div>
+            `,
+            showCancelButton: true,
+            confirmButtonText: 'Guardar',
+            cancelButtonText: 'Cancelar',
+            confirmButtonColor: '#198754',
+            focusConfirm: false,
+            preConfirm: () => {
+                const titulo = document.getElementById('swal-extra-titulo').value.trim();
+                const contenido = document.getElementById('swal-extra-contenido').value.trim();
+
+                if (!titulo || !contenido) {
+                    Swal.showValidationMessage('Por favor completa el título y el contenido');
+                    return false;
+                }
+
+                return { titulo, contenido };
+            }
+        }).then((result) => {
+            if (result.isConfirmed) {
+                const { titulo, contenido } = result.value;
+
+                // Obtener día actual abreviado (Ej: Mon, Tue, Wed)
+                const dias = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                const diaActual = dias[new Date().getDay()];
+
+                // Plantilla de la nueva nota HTML
+                const nuevaNotaHTML = `
+                    <div class="list-group-item backfondo border rounded p-2 lh-sm d-flex flex-column gap-2">
+                        <div class="d-flex w-100 align-items-center justify-content-between">
+                            <strong class="mb-1 text-truncate" style="max-width: 140px;">${titulo}</strong>
+                            <small class="text-muted">${diaActual}</small>
+                        </div>
+                        <div class="small text-secondary">${contenido}</div>
+                        
+                        <div class="d-flex justify-content-end gap-2 border-top pt-2 mt-1">
+                            <button class="btn btn-sm btn-outline-success p-1 px-2 btn-check-extra" title="Completar">
+                                <i class="bi bi-check-lg"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-primary p-1 px-2 btn-edit-extra" title="Editar">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-sm btn-outline-danger p-1 px-2 btn-delete-extra" title="Eliminar">
+                                <i class="bi bi-trash3"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+
+                // Insertar al inicio de la lista
+                contenedorNotasExtras.insertAdjacentHTML('afterbegin', nuevaNotaHTML);
+
+                // Notificación flotante
+                Swal.mixin({
+                    toast: true,
+                    position: "top-end",
+                    showConfirmButton: false,
+                    timer: 2000,
+                    timerProgressBar: true
+                }).fire({
+                    icon: "success",
+                    title: "Nota extra agregada"
+                });
+            }
+        });
+    });
+}
+
+
+if (contenedorNotasExtras) {
+    contenedorNotasExtras.addEventListener('click', (e) => {
+        const targetBtn = e.target.closest('button');
+        if (!targetBtn) return;
+
+        const tarjetaNota = targetBtn.closest('.list-group-item');
+
+
+        if (targetBtn.classList.contains('btn-check-extra')) {
+            tarjetaNota.classList.toggle('text-decoration-line-through');
+            tarjetaNota.classList.toggle('opacity-50');
+        }
+
+        if (targetBtn.classList.contains('btn-delete-extra')) {
+            Swal.fire({
+                title: '¿Eliminar nota?',
+                text: "Esta acción no se puede deshacer",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#dc3545',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, borrar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    tarjetaNota.remove();
+                }
+            });
+        }
+
+        if (targetBtn.classList.contains('btn-edit-extra')) {
+            const tituloEl = tarjetaNota.querySelector('strong');
+            const contenidoEl = tarjetaNota.querySelector('.small');
+
+            Swal.fire({
+                title: 'Editar Nota Extra',
+                html: `
+                    <input id="swal-edit-titulo" class="swal2-input" value="${tituloEl.textContent}" placeholder="Nota">
+                    <textarea id="swal-edit-contenido" class="swal2-textarea" placeholder="Informacion">${contenidoEl.textContent}</textarea>
+                `,
+                showCancelButton: true,
+                confirmButtonText: 'Guardar',
+                cancelButtonText: 'Cancelar',
+                preConfirm: () => {
+                    return {
+                        titulo: document.getElementById('swal-edit-titulo').value,
+                        contenido: document.getElementById('swal-edit-contenido').value
+                    }
+                }
+            }).then((result) => {
+                if (result.isConfirmed && result.value) {
+                    tituloEl.textContent = result.value.titulo;
+                    contenidoEl.textContent = result.value.contenido;
+                }
+            });
+        }
+    });
+}

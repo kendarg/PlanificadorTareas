@@ -17,7 +17,6 @@
     <nav class="navbar navbar-expand-lg border-bottom">
         <div class="container-fluid">
             
-            <!-- Botón para abrir NOTAS en móviles -->
             <button class="btn btn-outline-secondary d-lg-none me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebarNotas" aria-controls="sidebarNotas">
                 <i class="bi bi-journal-text"></i> Notas
             </button>
@@ -33,12 +32,6 @@
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <ul class="navbar-nav gap-2 mt-2 mt-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="#"><p class="home1"> Home</p></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="bi bi-person-circle"></i></a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" id="modo" href="#"><i class="bi bi-moon-stars-fill" id="icono"></i></a>
                     </li>
                 </ul>
@@ -46,56 +39,58 @@
         </div>
     </nav>
 
-    <!-- Contenido Principal -->
     <div class="d-flex" style="min-height: calc(100vh - 56px);">
 
-        <!-- Sidebar Notas Extras -->
-        <div class="notasExtra offcanvas-lg offcanvas-start border-end p-3" tabindex="-1" id="sidebarNotas" aria-labelledby="sidebarNotasLabel" style="width: 280px;">
-            <div class="offcanvas-header border-bottom mb-2 pb-3">
-                <h5 class="offcanvas-title fs-5 fw-semibold" id="sidebarNotasLabel">Notas Extras</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarNotas" aria-label="Close"></button>
-            </div>
+        <!--Notas Extras -->
+       <div class="notasExtra offcanvas-lg offcanvas-start border-end p-3" tabindex="-1" id="sidebarNotas" aria-labelledby="sidebarNotasLabel" style="width: 320px;">
+    <div class="offcanvas-header border-bottom mb-2 pb-3">
+        <h5 class="offcanvas-title fs-5 fw-semibold" id="sidebarNotasLabel">Notas Extras</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" data-bs-target="#sidebarNotas" aria-label="Close"></button>
+    </div>
 
-            <div class="offcanvas-body d-flex flex-column p-0">
-                <a href="/" class="d-none d-lg-flex align-items-center justify-content-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
-                    <span class="fs-5 fw-semibold">Notas Extras</span>
-                </a>
-                <div class="list-group list-group-flush scrollarea border rounded w-100">
-                    <a href="#" class="list-group-item backfondo list-group-item-action py-3 lh-sm">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <strong class="mb-1">Nota 1</strong>
-                            <small>Wed</small>
-                        </div>
-                        <div class="col-10 mb-1 small">Confirmar Extensión actividad para el 2026/06/08</div>
-                    </a>
-                    <a href="#" class="list-group-item backfondo list-group-item-action py-3 lh-sm">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <strong class="mb-1">Nota 2</strong>
-                            <small>Tues</small>
-                        </div>
-                        <div class="col-10 mb-1 small">Contenido de la nota...</div>
-                    </a>
-                    <a href="#" class="list-group-item backfondo list-group-item-action py-3 lh-sm">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
-                            <strong class="mb-1">Nota 3</strong>
-                            <small>Mon</small>
-                        </div>
-                        <div class="col-10 mb-1 small">Contenido de la nota...</div>
-                    </a>
+    <div class="offcanvas-body d-flex flex-column p-0">
+        <a href="#" class="d-none d-lg-flex align-items-center justify-content-center pb-3 mb-3 link-body-emphasis text-decoration-none border-bottom">
+            <span class="fs-5 fw-semibold">Notas Extras</span>
+        </a>
+        
+        <button id="btnNotaExtra" class="btn btn-secondary mb-3 w-100"> Agregar Nota</button>
+
+        <!-- Listado dinámico de notas extras -->
+        <div id="contenedorNotasExtras" class="list-group list-group-flush scrollarea border rounded w-100 gap-1 p-1">
+            
+            <!-- Ejemplo de ítem con acciones -->
+            <div class="list-group-item backfondo border rounded p-2 lh-sm d-flex flex-column gap-2">
+                <div class="d-flex w-100 align-items-center justify-content-between">
+                    <strong class="mb-1 text-truncate" style="max-width: 140px;">Nota 1</strong>
+                    <small class="text-muted">Wed</small>
+                </div>
+                <div class="small text-secondary">Confirmar Extensión actividad para el 2026/06/08</div>
+                
+                <!-- Botones de Acción (Editar, Check, Borrar) -->
+                <div class="d-flex justify-content-end gap-2 border-top pt-2 mt-1">
+                    <button class="btn btn-sm btn-outline-success p-1 px-2 btn-check-extra" title="Completar">
+                        <i class="bi bi-check-lg"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-primary p-1 px-2 btn-edit-extra" title="Editar">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button class="btn btn-sm btn-outline-danger p-1 px-2 btn-delete-extra" title="Eliminar">
+                        <i class="bi bi-trash3"></i>
+                    </button>
                 </div>
             </div>
-        </div>
 
-        <!-- Sección Tareas -->
+        </div>
+    </div>
+</div>
+
         <div class="flex-grow-1 p-3 p-md-4">
             <div class="row g-4">
                 <div class="col-12 col-md-12">
-                    <!-- Contenedor con la clase .tareas que detecta tu JS -->
                     <div class="d-flex flex-column gap-3 py-3 ps-4 pe-3 border rounded tareas">
                         
                         <div class="d-flex flex-wrap gap-2 w-100 mt-4 ps-8">
                             <button id="btnNuevaTarea" class="btn btn-secondary">Agregar Tarea</button>
-                            <vr></vr>
                             <span class="Rojo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">
                                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
                                 Alta
@@ -111,8 +106,6 @@
                         </div>
                         <hr>
 
-                        <!-- Las tareas dinámicas creadas desde tu JS se agregarán automáticamente aquí abajo -->
-
                     </div>
                 </div>
             </div>
@@ -120,14 +113,11 @@
 
     </div>
 
-    <!-- Scripts CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
-    <!-- Scripts Propios -->
+    <!-- Scripts -->
     <script src="./js/visual.js"></script>
-    <script src="./js/alerta.js"></script>
-    <script src="./js/tareas.js"></script>
     <script src="./js/taskManager.js"></script>
     <script src="./js/index.js"></script>
 </body>
