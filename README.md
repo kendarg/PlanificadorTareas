@@ -9,6 +9,7 @@ El proyecto utiliza **JavaScript, Bootstrap y SweetAlert2** para construir la in
 - https://www.figma.com/design/gsS7yzaMTd99tSOECDah1x/Sin-t%C3%ADtulo?node-id=74-11&t=KPrZ0YdlOD33uVDF-1
 * Trelo: https://trello.com/invite/b/6a6ba35f30f69a3c4c7acc56/ATTI65e0e9f4ef5bedbdaf73187603904658B74D1714/planificador-de-tareas
 * Gitpage: https://kendarg.github.io/PlanificadorTareas/
+* Bakend: https://github.com/kendarg/PlanificadorTareasBackend.git
 
 
 ## 🚀 Funcionalidades

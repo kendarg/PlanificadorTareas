@@ -1,27 +1,26 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-    const btnModo = document.getElementById("modo");
-    const icon = document.getElementById("icono");
+    const btnModoOscuro = document.getElementById("btn-modo-oscuro");
+    const btnModoClaro = document.getElementById("btn-modo-claro");
     const body = document.body;
 
-
-    const esOscuro = localStorage.getItem("modo") === "true";
+    const esOscuro = localStorage.getItem("modoOscuro") === "true";
     if (esOscuro) {
         body.classList.add("dark");
-        if (icon) {
-            icon.classList.add("bi-brightness-high");
-            icon.classList.remove("bi-moon-stars-fill");
-        }
     }
 
-    // Evento Click
-    if (btnModo && icon) {
-        btnModo.addEventListener("click", () => {
-            const estaOscuro = body.classList.toggle("dark");
-            localStorage.setItem("modo", estaOscuro);
-
-            icon.classList.toggle("bi-moon-stars-fill");
-            icon.classList.toggle("bi-brightness-high");
+    if (btnModoOscuro) {
+        btnModoOscuro.addEventListener("click", (e) => {
+            e.preventDefault();
+            body.classList.add("dark");
+            localStorage.setItem("modoOscuro", "true");
         });
     }
-});
+
+    if (btnModoClaro) {
+        btnModoClaro.addEventListener("click", (e) => {
+            e.preventDefault();
+            body.classList.remove("dark");
+            localStorage.setItem("modoOscuro", "false");
+        });
+    }
+}); 

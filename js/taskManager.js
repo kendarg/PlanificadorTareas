@@ -75,7 +75,7 @@ class TaskManager {
                     <h5 style="${estiliCompletado}">${task.titulo}</h5>
                     <p class="mb-0">${task.notas}</p>
                 </div>
-                <span class="badge d-flex flex-fill align-items-center justify-content-center py-3 ps-5 pe-5 border rounded-pill ${badgeClases}">
+                <span class="badge d-flex badge-fecha align-items-center justify-content-center py-3 ps-5 pe-5 border rounded-pill ${badgeClases}">
                     ${task.fecha}
                 </span>
                 <i class="bi bi-pencil-square btn-editar" style="cursor: pointer;"></i>
@@ -87,97 +87,154 @@ class TaskManager {
         contenedorTareas.insertAdjacentHTML('beforeend', tareaHTML);
     }
 
+    filtrarTareasPorPrioridad(prioridadSeleccionada) {
+        const todasLasTarjetas = document.querySelectorAll('.tareaFondo');
+
+        todasLasTarjetas.forEach(tarjeta => {
+            const idTarjeta = parseInt(tarjeta.getAttribute('data-id'));
+            const tareaBuscada = this.tasks.find(t => t.id === idTarjeta);
+            const siguienteHr = tarjeta.nextElementSibling;
+
+            if (tareaBuscada && tareaBuscada.importancia === prioridadSeleccionada) {
+                tarjeta.style.setProperty('display', 'flex', 'important');
+                if (siguienteHr && siguienteHr.tagName === 'HR') {
+                    siguienteHr.style.setProperty('display', 'block', 'important');
+                }
+            } else {
+                tarjeta.style.setProperty('display', 'none', 'important');
+                if (siguienteHr && siguienteHr.tagName === 'HR') {
+                    siguienteHr.style.setProperty('display', 'none', 'important');
+                }
+            }
+        });
+    }
+
     setupEventListeners() {
         document.addEventListener('click', (e) => {
             const target = e.target;
+
+            // Filtro desde badges superiores globales
+            const botonGlobal = target.closest('.btn-filtro-global');
+            if (botonGlobal) {
+                const prioridad = botonGlobal.getAttribute('data-prioridad');
+                this.filtrarTareasPorPrioridad(prioridad);
+                return;
+            }
+
             const tarjetaTarea = target.closest('.tareaFondo');
-            if (!tarjetaTarea) return;
+            if (tarjetaTarea) {
+                const taskId = parseInt(tarjetaTarea.getAttribute('data-id'));
 
-            const taskId = parseInt(tarjetaTarea.getAttribute('data-id'));
-
-            if (target.classList.contains('bi-trash3') || target.classList.contains('btn-eliminar')) {
-                Swal.fire({
-                    title: '¿Eliminar tarea?',
-                    text: "Esta acción no se puede deshacer",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Sí, eliminar',
-                    cancelButtonText: 'Cancelar'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        this.deleteTask(taskId);
-                        Swal.fire({
-                            toast: true,
-                            position: 'top-end',
-                            icon: 'success',
-                            title: 'Tarea eliminada',
-                            showConfirmButton: false,
-                            timer: 2000
-                        });
+                // Filtro individual desde el badge de fecha/prioridad
+                if (target.classList.contains('badge-fecha')) {
+                    const tareaActual = this.tasks.find(t => t.id === taskId);
+                    if (tareaActual) {
+                        this.filtrarTareasPorPrioridad(tareaActual.importancia);
                     }
-                });
-            }
+                    return;
+                }
 
-            if (target.classList.contains('bi-check2-square') || target.classList.contains('btn-completar')) {
-                this.toggleCompleteTask(taskId);
-            }
-            if (target.classList.contains('bi-pencil-square') || target.classList.contains('btn-editar')) {
-                const task = this.tasks.find(t => t.id === taskId);
-                if (!task) return;
-
-                Swal.fire({
-                    html: `
-                        <form class="p-2 text-start" id="formularioModalEdit">
-                            <div class="mb-3">
-                                <label class="form-label">Título</label>
-                                <input type="text" class="form-control" id="editTitulo" value="${task.titulo}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Persona a cargo</label>
-                                <input type="text" class="form-control" id="editPersona" value="${task.persona}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Importancia</label>
-                                <select class="form-select" id="editImportancia">
-                                    <option value="Alta" ${task.importancia === 'Alta' ? 'selected' : ''}>Alta</option>
-                                    <option value="Media" ${task.importancia === 'Media' ? 'selected' : ''}>Media</option>
-                                    <option value="Baja" ${task.importancia === 'Baja' ? 'selected' : ''}>Baja</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Fecha</label>
-                                <input type="date" class="form-control" id="editFecha" value="${task.fecha}">
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Notas</label>
-                                <textarea class="form-control" id="editNotas" rows="3">${task.notas}</textarea>
-                            </div>
-                        </form>
-                    `,
-                    showCancelButton: true,
-                    confirmButtonText: 'Guardar Cambios',
-                    cancelButtonText: 'Cancelar',
-                    preConfirm: () => {
-                        return {
-                            titulo: document.getElementById('editTitulo').value,
-                            persona: document.getElementById('editPersona').value,
-                            importancia: document.getElementById('editImportancia').value,
-                            fecha: document.getElementById('editFecha').value,
-                            notas: document.getElementById('editNotas').value
-                        };
-                    }
-                }).then((res) => {
-                    if (res.isConfirmed) {
-                        Object.assign(task, res.value);
-                        this.saveToLocalStorage();
-                        const contenedor = document.querySelector('.tareas');
-                        if (contenedor) {
-                            const items = contenedor.querySelectorAll('.tareaFondo, hr');
-                            items.forEach(el => el.remove());
-                            this.tasks.forEach(t => this.renderTask(t));
+                // Lógica de eliminar
+                if (target.classList.contains('bi-trash3') || target.classList.contains('btn-eliminar')) {
+                    Swal.fire({
+                        title: '¿Eliminar tarea?',
+                        text: "Esta acción no se puede deshacer",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Sí, eliminar',
+                        cancelButtonText: 'Cancelar'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            this.deleteTask(taskId);
+                            Swal.fire({
+                                toast: true,
+                                position: 'top-end',
+                                icon: 'success',
+                                title: 'Tarea eliminada',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
                         }
+                    });
+                }
+
+                // Lógica de completar
+                if (target.classList.contains('bi-check2-square') || target.classList.contains('btn-completar')) {
+                    this.toggleCompleteTask(taskId);
+                }
+
+                // Lógica de editar (restaurada)
+                if (target.classList.contains('bi-pencil-square') || target.classList.contains('btn-editar')) {
+                    const task = this.tasks.find(t => t.id === taskId);
+                    if (!task) return;
+
+                    Swal.fire({
+                        html: `
+                            <form class="p-2 text-start" id="formularioModalEdit">
+                                <div class="mb-3">
+                                    <label class="form-label">Título</label>
+                                    <input type="text" class="form-control" id="editTitulo" value="${task.titulo}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Persona a cargo</label>
+                                    <input type="text" class="form-control" id="editPersona" value="${task.persona}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Importancia</label>
+                                    <select class="form-select" id="editImportancia">
+                                        <option value="Alta" ${task.importancia === 'Alta' ? 'selected' : ''}>Alta</option>
+                                        <option value="Media" ${task.importancia === 'Media' ? 'selected' : ''}>Media</option>
+                                        <option value="Baja" ${task.importancia === 'Baja' ? 'selected' : ''}>Baja</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Fecha</label>
+                                    <input type="date" class="form-control" id="editFecha" value="${task.fecha}">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">Notas</label>
+                                    <textarea class="form-control" id="editNotas" rows="3">${task.notas}</textarea>
+                                </div>
+                            </form>
+                        `,
+                        showCancelButton: true,
+                        confirmButtonText: 'Guardar Cambios',
+                        cancelButtonText: 'Cancelar',
+                        preConfirm: () => {
+                            return {
+                                titulo: document.getElementById('editTitulo').value,
+                                persona: document.getElementById('editPersona').value,
+                                importancia: document.getElementById('editImportancia').value,
+                                fecha: document.getElementById('editFecha').value,
+                                notas: document.getElementById('editNotas').value
+                            };
+                        }
+                    }).then((res) => {
+                        if (res.isConfirmed) {
+                            Object.assign(task, res.value);
+                            this.saveToLocalStorage();
+                            const contenedor = document.querySelector('.tareas');
+                            if (contenedor) {
+                                contenedor.innerHTML = '';
+                                this.tasks.forEach(t => this.renderTask(t));
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        // Doble clic para restablecer la vista de todas las tareas
+        document.addEventListener('dblclick', (e) => {
+            if (e.target.classList.contains('badge-fecha') || e.target.closest('.btn-filtro-global')) {
+                const todasLasTarjetas = document.querySelectorAll('.tareaFondo');
+                todasLasTarjetas.forEach(tarjeta => {
+                    tarjeta.style.setProperty('display', 'flex', 'important');
+                    const siguienteHr = tarjeta.nextElementSibling;
+                    if (siguienteHr && siguienteHr.tagName === 'HR') {
+                        siguienteHr.style.setProperty('display', 'block', 'important');
                     }
                 });
             }
@@ -197,16 +254,20 @@ class TaskManager {
             this.tasks = JSON.parse(tasksGuardadas);
             this.currentId = parseInt(idGuardado) || 0;
 
-            document.addEventListener('DOMContentLoaded', () => {
-                this.tasks.forEach(task => this.renderTask(task));
-            });
+            const renderAll = () => this.tasks.forEach(task => this.renderTask(task));
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', renderAll);
+            } else {
+                renderAll();
+            }
         }
     }
 }
 
 const taskManager = new TaskManager();
 
-// Notas Extra
+// === LÓGICA NOTAS EXTRA ===
 
 const btnNotaExtra = document.getElementById("btnNotaExtra");
 const contenedorNotasExtras = document.getElementById("contenedorNotasExtras");
@@ -244,12 +305,9 @@ if (btnNotaExtra && contenedorNotasExtras) {
         }).then((result) => {
             if (result.isConfirmed) {
                 const { titulo, contenido } = result.value;
-
-                // Obtener día actual abreviado (Ej: Mon, Tue, Wed)
                 const dias = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
                 const diaActual = dias[new Date().getDay()];
 
-                // Plantilla de la nueva nota HTML
                 const nuevaNotaHTML = `
                     <div class="list-group-item backfondo border rounded p-2 lh-sm d-flex flex-column gap-2">
                         <div class="d-flex w-100 align-items-center justify-content-between">
@@ -272,10 +330,8 @@ if (btnNotaExtra && contenedorNotasExtras) {
                     </div>
                 `;
 
-                // Insertar al inicio de la lista
                 contenedorNotasExtras.insertAdjacentHTML('afterbegin', nuevaNotaHTML);
 
-                // Notificación flotante
                 Swal.mixin({
                     toast: true,
                     position: "top-end",
@@ -291,14 +347,12 @@ if (btnNotaExtra && contenedorNotasExtras) {
     });
 }
 
-
 if (contenedorNotasExtras) {
     contenedorNotasExtras.addEventListener('click', (e) => {
         const targetBtn = e.target.closest('button');
         if (!targetBtn) return;
 
         const tarjetaNota = targetBtn.closest('.list-group-item');
-
 
         if (targetBtn.classList.contains('btn-check-extra')) {
             tarjetaNota.classList.toggle('text-decoration-line-through');

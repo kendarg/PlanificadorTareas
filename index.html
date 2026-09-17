@@ -31,8 +31,13 @@
 
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
                 <ul class="navbar-nav gap-2 mt-2 mt-lg-0">
-                    <li class="nav-item">
-                        <a class="nav-link" id="modo" href="#"><i class="bi bi-moon-stars-fill" id="icono"></i></a>
+                    <li class="nav-item d-flex align-items-center gap-2">
+                        <a class="nav-link" id="btn-modo-oscuro" href="#" role="button" aria-label="Activar modo oscuro" title="Modo Oscuro">
+                            <i class="bi bi-moon-stars-fill"></i>
+                        </a>
+                        <a class="nav-link" id="btn-modo-claro" href="#" role="button" aria-label="Activar modo claro" title="Modo Claro">
+                            <i class="bi bi-brightness-high"></i>
+                        </a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +63,6 @@
         <!-- Listado dinámico de notas extras -->
         <div id="contenedorNotasExtras" class="list-group list-group-flush scrollarea border rounded w-100 gap-1 p-1">
             
-            <!-- Ejemplo de ítem con acciones -->
             <div class="list-group-item backfondo border rounded p-2 lh-sm d-flex flex-column gap-2">
                 <div class="d-flex w-100 align-items-center justify-content-between">
                     <strong class="mb-1 text-truncate" style="max-width: 140px;">Nota 1</strong>
@@ -66,7 +70,7 @@
                 </div>
                 <div class="small text-secondary">Confirmar Extensión actividad para el 2026/06/08</div>
                 
-                <!-- Botones de Acción (Editar, Check, Borrar) -->
+                
                 <div class="d-flex justify-content-end gap-2 border-top pt-2 mt-1">
                     <button class="btn btn-sm btn-outline-success p-1 px-2 btn-check-extra" title="Completar">
                         <i class="bi bi-check-lg"></i>
@@ -88,18 +92,19 @@
             <div class="row g-4">
                 <div class="col-12 col-md-12">
                     <div class="d-flex flex-column gap-3 py-3 ps-4 pe-3 border rounded tareas">
-                        
-                        <div class="d-flex flex-wrap gap-2 w-100 mt-4 ps-8">
+                        <h1 class="d-flex justify-content-between align-items-center w-100">Mis tareas Pendientes
                             <button id="btnNuevaTarea" class="btn btn-secondary">Agregar Tarea</button>
-                            <span class="Rojo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill">
+                        </h1>
+                        <div class="d-flex flex-wrap gap-2 w-100 mt-4 ps-8">
+                        <span class="Rojo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-danger-emphasis bg-danger-subtle border border-danger-subtle rounded-pill btn-filtro-global" data-prioridad="Alta" style="cursor: pointer;">
                                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
                                 Alta
                             </span>
-                            <span class="Amarillo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill">
+                            <span class="Amarillo badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-warning-emphasis bg-warning-subtle border border-warning-subtle rounded-pill btn-filtro-global" data-prioridad="Media" style="cursor: pointer;">
                                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
                                 Media
                             </span>
-                            <span class="Verde badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-success-emphasis bg-success-subtle border border-success-subtle rounded-pill">
+                            <span class="Verde badge d-flex flex-fill justify-content-center align-items-center p-1 pe-2 text-success-emphasis bg-success   -subtle border border-success-subtle rounded-pill btn-filtro-global"   data-prioridad="Baja" style="cursor: pointer;">
                                 <img class="rounded-circle me-1" width="24" height="24" src="https://media.istockphoto.com/id/2217195981/vector/human-silhouette-profile.webp?a=1&b=1&s=612x612&w=0&k=20&c=wUSqGblDH8gOge5ipaBt1TjM0HLCsXHWzp-qzt_V4os=" alt="">
                                 Baja
                             </span>
