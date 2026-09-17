@@ -103,10 +103,16 @@ body.dark #descInput, body.dark #personaInput,body.dark #importanciaInput,body.d
 background-color: #ECECEC;
 }
 
-body.dark #btnNuevaTarea, body.dark #btnNotaExtra{
+body.dark #btnNuevaTarea{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border: solid rgb(1, 29, 53) 1px !important;
+    background-color: #1A4078 !important;
+    color: #ebf1f8 !important;
+}
+body.dark #btnNotaExtra{
+    border: solid rgb(1, 29, 53) 1px !important;
     background-color: #1A4078 !important;
     color: #ebf1f8 !important;
 }

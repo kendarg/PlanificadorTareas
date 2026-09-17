@@ -74,6 +74,7 @@ background-color: #ECECEC;
     display: inline-block;
 }
 #btnNotaExtra{
+    border: solid #035963 1px;
     margin-bottom: 2rem;
     background-color: #0D6973;
 }
@@ -83,9 +84,10 @@ background-color: #ECECEC;
     font-size: 1rem !important;
 }
 #btnNuevaTarea{
-    display: flex; 
+    display: flex;
     justify-content: space-between;
     align-items: center;
+    border: solid #036ecc 1px;
     background-color: #1F598C;
 }
 .list-group-item{
